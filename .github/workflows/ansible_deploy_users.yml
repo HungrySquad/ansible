@@ -44,12 +44,13 @@ jobs:
         # Optional, SSH private key
         key: ${{secrets.SSH_PRIVATE_KEY}}
         # Optional, literal inventory file contents
-        # inventory: |
-        #   [all]
-        #   example.com
+        inventory: |
+          [webservers]
+          78.47.231.122 ansible_ssh_private_key_file="${{secrets.SSH_PRIVATE_KEY}}"
 
-        #   [group1]
-        #   example.com
+          [all:vars]
+          ansible_ssh_user = root
+
         # Optional, SSH known hosts file content
         known_hosts: .known_hosts
         # Optional, encrypted vault password
@@ -58,7 +59,6 @@ jobs:
         # requirements: galaxy-requirements.yml
         # Optional, additional flags to pass to ansible-playbook
         options: |
-          --inventory .hosts
           --check
 
 
