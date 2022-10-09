@@ -13,6 +13,7 @@
       name: "{{ item.username }}"
       state: present #absent to delete
       group: sudo
+      shell: /bin/bash
      loop: "{{ users }}"
   
    - name: Add User keys
