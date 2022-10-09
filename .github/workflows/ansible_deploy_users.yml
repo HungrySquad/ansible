@@ -59,6 +59,5 @@ jobs:
         # Optional, additional flags to pass to ansible-playbook
         options: |
           --inventory hosts
-          --check
 
 
