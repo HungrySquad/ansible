@@ -26,6 +26,6 @@
    - name: Create developer user
      user:
       name: "developer"
-      password: '*'
+      password: ''
       shell: /bin/bash
       state: present
