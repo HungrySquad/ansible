@@ -1,0 +1,23 @@
+---
+- name: Deploy Users
+  hosts: all
+  vars:
+    users:
+      - username: mea
+        ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDj0YfqZOXYAup7FmsoADjlmL82W7LbHuKGk2+qN39kuJCi3+jwrTCl9nlv3ROz4C6kzxDnEpq9nujLZezj7OBa0pe6Wwqd2C1FhwuWeiV9ZuptB7ohkaozjFiMj/Em9u4JH2uZlMi+XJDBhSQLjhimGMfDyxSBJly0JDqGZuypp2Hq0Al8VUskezpW+98HbOICt/+6E8hlq4EUHDaqwMkB8zh3tTka8QKNJDYkCCIKMNuG/bf3RZYuFtr5wcaAcdhCH0sWtbD3zaEBvS0mPLFL6ORzne2KepCZK2cxn68Z93eQqgW39b+ptVaRP1SgVzqWLB6IL/RWz0uqCaTKhob6agNF8PvDphwJ70CUYyjATfPLYxvB4BkaiIuxH0KP2XLXxMluf+qkCL0jiBQdWcu/4rJ8GqBK2ZB5kZkBa7MY7oITllP8c1I4fGieLvKo61Qj6cJKAU+trR8elWPwf++5y9jXZreRpaH/F1EEJWfA5SvaGzHEDtLUvObKiz1bvZ0= mea@mea-laptop"
+      # - username: <your username>
+      #   ssh_key: <your ssh_key id_rsa.pub> ["ssh-keygen" command to generate one]
+  tasks:
+   - name: Create Users
+     user:
+      name: "{{ item.username }}"
+      state: present #absent to delete
+      group: sudo
+     loop: "{{ users }}"
+  
+   - name: Add User keys
+     authorized_key:
+      user: "{{ item.username }}"
+      state: present
+      key: "{{ item.ssh_key }}"
+     loop: "{{ users }}"
