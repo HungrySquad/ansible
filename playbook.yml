@@ -12,7 +12,7 @@
      user:
       name: "{{ item.username }}"
       state: present #absent to delete
-      group: sudo
+      password: '*' 
       shell: /bin/bash
      loop: "{{ users }}"
   
@@ -22,3 +22,10 @@
       state: present
       key: "{{ item.ssh_key }}"
      loop: "{{ users }}"
+
+   - name: Create developer user
+     user:
+      name: "developer"
+      password: ''
+      shell: /bin/bash
+      state: present
