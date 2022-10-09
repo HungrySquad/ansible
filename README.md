@@ -13,3 +13,10 @@
 ~~~bash
 ssh <username>@78.47.231.122 -i <path_to_id_rsa>
 ~~~
+
+### To use development environment
+
+~~~bash
+su developer
+cd /opt/software
+~~~
